@@ -1,4 +1,5 @@
 # Beetle Lab
+# Abandoned
 
 import random
 
@@ -74,5 +75,6 @@ while not win:
     rand_dise = dise()
     print(f"Dise result: {rand_dise}/{num2name(rand_dise)}")
     while vaild6():
+        print("")
 
     break
