@@ -1,35 +1,38 @@
 # Beetle_Lab_2
 
+
 # Environment
 import random
+
 
 # Data Base
 # Initialize an empty dictionary to store player scores
 player_scores = {}
+
 
 # Functions
 def roll_dice():
     return random.randint(1,6)
 
 # Converting number to names
-def name(def_number):
-    if def_number == 6:
+def name(number_x):
+    if number_x == 6:
         return "Body"
-    elif def_number == 5:
+    elif number_x == 5:
         return "Head"
-    elif def_number == 4:
+    elif number_x == 4:
         return "Tail"
-    elif def_number == 3:
+    elif number_x == 3:
         return "Leg"
-    elif def_number == 2:
+    elif number_x == 2:
         return "Antenna"
-    elif def_number == 1:
+    elif number_x == 1:
         return "Eye"
     else:
         return "Not vaild"
         # For now
 
-def db_auth(player_x):
+def db_auth(player_x): # Database check
     if player_x in player_scores:
         # pass
         print("Key exists, no update")
@@ -39,71 +42,73 @@ def db_auth(player_x):
         print("Key not exists, a new key has been created")
         db_auth(player_x)
 
-def validate(player_x,def_dice): # Non-functional, just pass through value for now
-    if def_dice == 6:
-        if index_auth(player_x,def_dice) == 0:
-            player_scores[player_x][def_dice - 1] = player_scores[player_x][def_dice - 1] + 1
-            print(f"{def_dice}/{name(def_dice)} is vaild, ")
+def index_auth(player_x,index_x): # Function for checking index
+    index_x = index_x - 1
+    return player_scores[player_x][index_x] # Index start from 0, 5 is the sixth index
+        # Unfinished
+        # Need add more logic
+
+def validate(player_y,dice_x): # Non-functional, just pass through value for now
+    if dice_x == 6:
+        if index_auth(player_y,dice_x) == 0:
+            player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+            print(f"{dice_x}/{name(dice_x)} is vaild, ")
         else:
             pass # Unfinished
         return 6
-    elif def_dice == 5:
-        if index_auth(player_x,6) == 1:
-            if index_auth(player_x,def_dice) == 0:
-                player_scores[player_x][def_dice - 1] = player_scores[player_x][def_dice - 1] + 1
+    elif dice_x == 5:
+        if index_auth(player_y,6) == 1:
+            if index_auth(player_y,dice_x) == 0:
+                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             else:
                 pass # Unfinished
         else:
             pass
         return 5
-    elif def_dice == 4:
-        if index_auth(player_x,6) == 1:
-            if index_auth(player_x,def_dice) == 0:
-                player_scores[player_x][def_dice - 1] = player_scores[player_x][def_dice - 1] + 1
+    elif dice_x == 4:
+        if index_auth(player_y,6) == 1:
+            if index_auth(player_y,dice_x) == 0:
+                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             else:
                 pass # Unfinished
         else:
             pass
         return 4
-    elif def_dice == 3:
-        if index_auth(player_x,6) == 1:
-            if index_auth(player_x,def_dice) <= 4:
-                player_scores[player_x][def_dice - 1] = player_scores[player_x][def_dice - 1] + 1
+    elif dice_x == 3:
+        if index_auth(player_y,6) == 1:
+            if index_auth(player_y,dice_x) <= 4:
+                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             else:
                 pass # Unfinished
         else:
             pass
         return 3
-    elif def_dice == 2:
-        if index_auth(player_x,5) == 1:
-            if index_auth(player_x,def_dice) <= 2:
-                player_scores[player_x][def_dice - 1] = player_scores[player_x][def_dice - 1] + 1
+    elif dice_x == 2:
+        if index_auth(player_y,5) == 1:
+            if index_auth(player_y,dice_x) <= 2:
+                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             else:
                 pass # Unfinished
         else:
             pass
         return 2
-    elif def_dice == 1:
-        if index_auth(player_x,5) == 1:
-            if index_auth(player_x,def_dice) <= 2:
-                player_scores[player_x][def_dice - 1] = player_scores[player_x][def_dice - 1] + 1
+    elif dice_x == 1:
+        if index_auth(player_y,5) == 1:
+            if index_auth(player_y,dice_x) <= 2:
+                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             else:
                 pass # Unfinished
         else:
             pass
         return 1
 
-def index_auth(player_x,index_x):
-    index_x = index_x - 1
-    return player_scores[player_x][index_x] # Index start from 0, 5 is the sixth index
-        # Unfinished
-
-def win_auth(player_y):
-    if player_scores[player_y] == [2,2,4,1,1,1]:
-        print(f"{player_y} has win")
+def win_auth(player_z):
+    if player_scores[player_z] == [2,2,4,1,1,1]:
+        print(f"{player_z} has win")
         return True
     else:
         return False
+    
 
 # Logic
 print("Beetle Lab")
@@ -114,6 +119,7 @@ player_win = False # Default no one win yet
     # num_players = int(input("Enter the number of player: "))
     # break
 
+# Player number input
 while True: # Use loop to input until value is integer
     try: # Error management, increase robustness
         num_players = int(input("Enter the number of players: "))
@@ -148,4 +154,5 @@ while not player_win:
         
         pass # Unfinished
 
-# Finction could not input 2 value/information
+# Finction could not input 2 value/information //Fixed
+# Explain to play the logic e.g. No change because of condition not meet
