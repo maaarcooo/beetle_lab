@@ -32,25 +32,30 @@ def name(number_x):
         return "Not vaild"
         # For now
 
-def db_auth(player_x): # Database check
+# Database check
+def db_auth(player_x):
     if player_x in player_scores:
         # pass
-        print("Key exists, no update")
+        print(player_scores[player_x])
+        print(f"{player_x}: Key exists, no update")
         return True
     else:
         player_scores[player_x] = [0,0,0,0,0,0]
-        print("Key not exists, a new key has been created")
+        print(f"{player_x}: Key not exists, a new key has been created")
+        print("Rerun db_auth")
         db_auth(player_x)
 
-def index_auth(player_x,index_x): # Function for checking index
+# Function for checking index
+def index_auth(player_x,index_x):
     index_x = index_x - 1
     return player_scores[player_x][index_x] # Index start from 0, 5 is the sixth index
         # Unfinished
         # Need add more logic
 
-def validate(player_y,dice_x): # Non-functional, just pass through value for now
+def validate(player_y,dice_x):
     if dice_x == 6:
         if index_auth(player_y,dice_x) == 0:
+            print(f"{dice_x}/{name(dice_x)} is 0") # Unfinished
             player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             print(f"{dice_x}/{name(dice_x)} is vaild, ")
         else:
@@ -58,6 +63,7 @@ def validate(player_y,dice_x): # Non-functional, just pass through value for now
         return 6
     elif dice_x == 5:
         if index_auth(player_y,6) == 1:
+            print(f"{dice_x}/{name(dice_x)} is 1") # Unfinished
             if index_auth(player_y,dice_x) == 0:
                 player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             else:
@@ -100,8 +106,9 @@ def validate(player_y,dice_x): # Non-functional, just pass through value for now
                 pass # Unfinished
         else:
             pass
-        return 1
+        return 1 # Bug
 
+# Check for win, run after each db change
 def win_auth(player_z):
     if player_scores[player_z] == [2,2,4,1,1,1]:
         print(f"{player_z} has win")
@@ -139,12 +146,12 @@ print(player_scores)
 
 while not player_win:
     for player_now in player_scores.keys():
-        print(f"Current Player: {player_now}")
+        print(f"----Current Player: {player_now}----")
     
         input("Press Enter to roll the dice...")  # Wait for the player to press Enter
         rand_dice = roll_dice()
 
-        print(f"dice result: {rand_dice}/{name(rand_dice)}")
+        print(f"Dice result: {rand_dice}/{name(rand_dice)}")
 
         db_auth(player_now)
 
