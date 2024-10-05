@@ -36,8 +36,10 @@ def name(number_x):
 def db_auth(player_x):
     if player_x in player_scores:
         # pass
+        print(f"\nPlayer {player_x} db_auth")
+        print(f"\nPre-updated scores for {player_x}:")
         print(player_scores[player_x])
-        print(f"{player_x}: Key exists, no update")
+        print(f"Key exists, no database update")
         return True
     else:
         player_scores[player_x] = [0,0,0,0,0,0]
@@ -47,68 +49,82 @@ def db_auth(player_x):
 
 # Function for checking index
 def index_auth(player_x,index_x):
-    index_x = index_x - 1
-    return player_scores[player_x][index_x] # Index start from 0, 5 is the sixth index
+    # index_x = index_x - 1
+    return player_scores[player_x][index_x - 1] # Index start from 0, 5 is the sixth index
         # Unfinished
         # Need add more logic
 
+# Function for validate the main logic about the game rules
 def validate(player_y,dice_x):
+    print("\nValidation:")
     if dice_x == 6:
-        if index_auth(player_y,dice_x) == 0:
-            print(f"{dice_x}({name(dice_x)}) is 0") # Unfinished
-            player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
-            print(f"{dice_x}({name(dice_x)}) is vaild\n{name(dice_x)} added 1")
+        if index_auth(player_y,6) == 0:
+            print(f"6({name(6)}) is 0 (Empty)")
+            if index_auth(player_y,dice_x) == 0:
+                add_score(player_y,dice_x)
+            else:
+                print(f"6({name(6)}) is not 0 (Already has {name(6)})\nAbort add_score")
+            # player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+            # print(f"{dice_x}({name(dice_x)}) is vaild\n{name(dice_x)} added 1")
         else:
-            pass # Unfinished
-        return 6
+            pass
     elif dice_x == 5:
         if index_auth(player_y,6) == 1:
+            print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
             print(f"{dice_x}/{name(dice_x)} is 1") # Unfinished
             if index_auth(player_y,dice_x) == 0:
-                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+                add_score(player_y,dice_x)
             else:
+                print(f"5({name(5)}) is not 0 (Already has {name(5)})\nAbort add_score")
                 pass # Unfinished
         else:
             pass
-        return 5
+        # return 5
     elif dice_x == 4:
         if index_auth(player_y,6) == 1:
+            print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
             if index_auth(player_y,dice_x) == 0:
-                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+                add_score(player_y,dice_x)
             else:
-                pass # Unfinished
+                print(f"4({name(4)}) is not 0 (Already has {name(4)})\nAbort add_score")
         else:
             pass
-        return 4
     elif dice_x == 3:
         if index_auth(player_y,6) == 1:
-            if index_auth(player_y,dice_x) <= 4:
-                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+            print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
+            if index_auth(player_y,dice_x) < 4:
+                add_score(player_y,dice_x)
             else:
-                pass # Unfinished
+                print(f"3({name(3)}) is not lower than 4 (Already has maximum {name(3)})\nAbort add_score")
         else:
             pass
-        return 3
+        # return 3
     elif dice_x == 2:
         if index_auth(player_y,5) == 1:
-            if index_auth(player_y,dice_x) <= 2:
-                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+            print(f"Dependent: 5({name(5)}) is 1 (Meet the requirements)")
+            if index_auth(player_y,dice_x) < 2:
+                add_score(player_y,dice_x)
             else:
-                pass # Unfinished
+                print(f"2({name(2)}) is not lower than 2 (Already has maximum {name(2)})\nAbort add_score")
         else:
             pass
-        return 2
+        # return 2
     elif dice_x == 1:
         if index_auth(player_y,5) == 1:
-            if index_auth(player_y,dice_x) <= 2:
-                player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+            print(f"Dependent: 5({name(5)}) is 1 (Meet the requirements)")
+            if index_auth(player_y,dice_x) < 2:
+                add_score(player_y,dice_x)
             else:
-                pass # Unfinished
+                print(f"1({name(1)}) is not lower than 2 (Already has maximum {name(1)})\nAbort add_score")
         else:
             pass
-        return 1
+        # return 1
     else:
         print("Unvaild") # For now
+
+def add_score(player_y,dice_x):
+    player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
+    print(f"{dice_x}({name(dice_x)}) is vaild\n{name(dice_x)} added 1")
 
 # Check for win, run after each db change
 def win_auth(player_z):
@@ -153,16 +169,20 @@ while not player_win:
         input("Press Enter to roll the dice [Enter]")  # Wait for the player to press Enter
         rand_dice = roll_dice()
 
-        print(f"Dice result: {rand_dice}({name(rand_dice)})")
+        print(f"\nDice result: {rand_dice}({name(rand_dice)})")
 
         db_auth(player_now)
 
         validate(player_now,rand_dice)
 
         print(f"\nUpdated scores for {player_now}:")
+        # print(f"\nPlayer {player_now} updated scores")
         print(player_scores[player_now])
         
-        pass # Unfinished
+        if win_auth(player_now):
+            player_win = True
+        else:
+            pass
 
 # Finction could not input 2 value/information //Fixed
 # Explain to play the logic e.g. No change because of condition not meet
