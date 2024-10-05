@@ -209,9 +209,10 @@ while not player_win:
             print("\n----Game finished----")
             print(player_scores)
             player_win = True
-            break # Avoid loop have extra round
-        else:
-            pass
+            break # Break out of the for loop
+    # Additional break to exit the while loop after the game finishes
+    if player_win:
+        break
 
 # Finction could not input 2 value/information //Fixed
 # Explain to play the logic e.g. No change because of condition not meet //Fixed
