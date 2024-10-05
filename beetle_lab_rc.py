@@ -147,7 +147,7 @@ def win_auth(player_z):
     
 
 # Logic
-print("Beetle Lab")
+print("----Beetle Lab----\n")
 player_win = False # Default no one win yet
 
 # Ask for the number of players
