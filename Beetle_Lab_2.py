@@ -76,58 +76,58 @@ def validate(player_y,dice_x):
             # player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
             # print(f"{dice_x}({name(dice_x)}) is vaild\n{name(dice_x)} added 1")
         else:
-            pass
+            pass # Requirements meet
     elif dice_x == 5:
         if index_auth(player_y,6) == 1:
-            print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
+            print(f"Dependent: 6({name(6)}) is 1 (Requirements meet)")
             print(f"{dice_x}/{name(dice_x)} is 1") # Unfinished
             if index_auth(player_y,dice_x) == 0:
                 add_score(player_y,dice_x)
             else:
                 print(f"5({name(5)}) is not 0 (Already has {name(5)})\nAbort add_score")
         else:
-            print(f"Dependent: 6({name(6)}) is not 1 (Does not meet the requirements)")
+            print(f"Dependent: 6({name(6)}) is not 1 (Requirements not meet)")
             print("The body must exist before the head can be added")
 
     elif dice_x == 4:
         if index_auth(player_y,6) == 1:
-            print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
+            print(f"Dependent: 6({name(6)}) is 1 (Requirements meet)")
             if index_auth(player_y,dice_x) == 0:
                 add_score(player_y,dice_x)
             else:
                 print(f"4({name(4)}) is not 0 (Already has {name(4)})\nAbort add_score")
         else:
-            print(f"Dependent: 6({name(6)}) is not 1 (Does not meet the requirements)")
+            print(f"Dependent: 6({name(6)}) is not 1 (Requirements not meet)")
             print("The body must exist before the tail can be added")
     elif dice_x == 3:
         if index_auth(player_y,6) == 1:
-            print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
+            print(f"Dependent: 6({name(6)}) is 1 (Requirements meet)")
             if index_auth(player_y,dice_x) < 4:
                 add_score(player_y,dice_x)
             else:
                 print(f"3({name(3)}) is not lower than 4 (Already has maximum {name(3)})\nAbort add_score")
         else:
-            print(f"Dependent: 6({name(6)}) is not 1 (Does not meet the requirements)")
+            print(f"Dependent: 6({name(6)}) is not 1 (Requirements not meet)")
             print("The body must exist before the leg can be added")
     elif dice_x == 2:
         if index_auth(player_y,5) == 1:
-            print(f"Dependent: 5({name(5)}) is 1 (Meet the requirements)")
+            print(f"Dependent: 5({name(5)}) is 1 (Requirements meet)")
             if index_auth(player_y,dice_x) < 2:
                 add_score(player_y,dice_x)
             else:
                 print(f"2({name(2)}) is not lower than 2 (Already has maximum {name(2)})\nAbort add_score")
         else:
-            print(f"Dependent: 5({name(5)}) is not 1 (Does not meet the requirements)")
+            print(f"Dependent: 5({name(5)}) is not 1 (Requirements not meet)")
             print("The head must exist before the antenna can be added")
     elif dice_x == 1:
         if index_auth(player_y,5) == 1:
-            print(f"Dependent: 5({name(5)}) is 1 (Meet the requirements)")
+            print(f"Dependent: 5({name(5)}) is 1 (Requirements meet)")
             if index_auth(player_y,dice_x) < 2:
                 add_score(player_y,dice_x)
             else:
                 print(f"1({name(1)}) is not lower than 2 (Already has maximum {name(1)})\nAbort add_score")
         else:
-            print(f"Dependent: 5({name(5)}) is not 1 (Does not meet the requirements)")
+            print(f"Dependent: 5({name(5)}) is not 1 (Requirements not meet)")
             print("The head must exist before the eye can be added")
     else:
         print("Unvaild") # For now
@@ -195,5 +195,6 @@ while not player_win:
             pass
 
 # Finction could not input 2 value/information //Fixed
-# Explain to play the logic e.g. No change because of condition not meet
-# Add def check_duplicate_name(player_name, player_scores):
+# Explain to play the logic e.g. No change because of condition not meet //Fixed
+# Add def check_duplicate_name(player_name, player_scores): //Added
+# Add def check_duplicate_name(player_name, player_scores) to loop without breaking the loop
