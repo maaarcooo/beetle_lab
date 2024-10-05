@@ -11,6 +11,15 @@ player_scores = {}
 
 
 # Functions
+
+# Function to check if the player name already exists
+def check_duplicate_name(player_name, player_scores):
+    if player_name in player_scores:
+        print(f"Player name '{player_name}' already exists. Please choose a different name.")
+        return True
+    else:
+        return False
+
 def roll_dice():
     return random.randint(1,6)
 
@@ -79,7 +88,7 @@ def validate(player_y,dice_x):
         else:
             print(f"Dependent: 6({name(6)}) is not 1 (Does not meet the requirements)")
             print("The body must exist before the head can be added")
-        # return 5
+
     elif dice_x == 4:
         if index_auth(player_y,6) == 1:
             print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
