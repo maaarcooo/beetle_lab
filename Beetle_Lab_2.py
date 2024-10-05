@@ -106,7 +106,9 @@ def validate(player_y,dice_x):
                 pass # Unfinished
         else:
             pass
-        return 1 # Bug
+        return 1
+    else:
+        print("Unvaild") # For now
 
 # Check for win, run after each db change
 def win_auth(player_z):
