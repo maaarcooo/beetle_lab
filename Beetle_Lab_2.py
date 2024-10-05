@@ -55,9 +55,9 @@ def index_auth(player_x,index_x):
 def validate(player_y,dice_x):
     if dice_x == 6:
         if index_auth(player_y,dice_x) == 0:
-            print(f"{dice_x}/{name(dice_x)} is 0") # Unfinished
+            print(f"{dice_x}({name(dice_x)}) is 0") # Unfinished
             player_scores[player_y][dice_x - 1] = player_scores[player_y][dice_x - 1] + 1
-            print(f"{dice_x}/{name(dice_x)} is vaild, ")
+            print(f"{dice_x}({name(dice_x)}) is vaild\n{name(dice_x)} added 1")
         else:
             pass # Unfinished
         return 6
@@ -148,18 +148,19 @@ print(player_scores)
 
 while not player_win:
     for player_now in player_scores.keys():
-        print(f"----Current Player: {player_now}----")
+        print(f"\n\n----Current Player: {player_now}----")
     
-        input("Press Enter to roll the dice...")  # Wait for the player to press Enter
+        input("Press Enter to roll the dice [Enter]")  # Wait for the player to press Enter
         rand_dice = roll_dice()
 
-        print(f"Dice result: {rand_dice}/{name(rand_dice)}")
+        print(f"Dice result: {rand_dice}({name(rand_dice)})")
 
         db_auth(player_now)
 
         validate(player_now,rand_dice)
 
-        
+        print(f"\nUpdated scores for {player_now}:")
+        print(player_scores[player_now])
         
         pass # Unfinished
 
