@@ -76,9 +76,9 @@ def validate(player_y,dice_x):
                 add_score(player_y,dice_x)
             else:
                 print(f"5({name(5)}) is not 0 (Already has {name(5)})\nAbort add_score")
-                pass # Unfinished
         else:
-            pass
+            print(f"Dependent: 6({name(6)}) is not 1 (Does not meet the requirements)")
+            print("The body must exist before the head can be added")
         # return 5
     elif dice_x == 4:
         if index_auth(player_y,6) == 1:
@@ -88,7 +88,8 @@ def validate(player_y,dice_x):
             else:
                 print(f"4({name(4)}) is not 0 (Already has {name(4)})\nAbort add_score")
         else:
-            pass
+            print(f"Dependent: 6({name(6)}) is not 1 (Does not meet the requirements)")
+            print("The body must exist before the tail can be added")
     elif dice_x == 3:
         if index_auth(player_y,6) == 1:
             print(f"Dependent: 6({name(6)}) is 1 (Meet the requirements)")
@@ -97,8 +98,8 @@ def validate(player_y,dice_x):
             else:
                 print(f"3({name(3)}) is not lower than 4 (Already has maximum {name(3)})\nAbort add_score")
         else:
-            pass
-        # return 3
+            print(f"Dependent: 6({name(6)}) is not 1 (Does not meet the requirements)")
+            print("The body must exist before the leg can be added")
     elif dice_x == 2:
         if index_auth(player_y,5) == 1:
             print(f"Dependent: 5({name(5)}) is 1 (Meet the requirements)")
@@ -107,8 +108,8 @@ def validate(player_y,dice_x):
             else:
                 print(f"2({name(2)}) is not lower than 2 (Already has maximum {name(2)})\nAbort add_score")
         else:
-            pass
-        # return 2
+            print(f"Dependent: 5({name(5)}) is not 1 (Does not meet the requirements)")
+            print("The head must exist before the antenna can be added")
     elif dice_x == 1:
         if index_auth(player_y,5) == 1:
             print(f"Dependent: 5({name(5)}) is 1 (Meet the requirements)")
@@ -117,8 +118,8 @@ def validate(player_y,dice_x):
             else:
                 print(f"1({name(1)}) is not lower than 2 (Already has maximum {name(1)})\nAbort add_score")
         else:
-            pass
-        # return 1
+            print(f"Dependent: 5({name(5)}) is not 1 (Does not meet the requirements)")
+            print("The head must exist before the eye can be added")
     else:
         print("Unvaild") # For now
 
@@ -186,3 +187,4 @@ while not player_win:
 
 # Finction could not input 2 value/information //Fixed
 # Explain to play the logic e.g. No change because of condition not meet
+# Add def check_duplicate_name(player_name, player_scores):
